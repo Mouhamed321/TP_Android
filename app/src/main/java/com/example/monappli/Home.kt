@@ -13,17 +13,44 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowWidthSizeClass
 
 @Composable
-fun MonProfil(modifier: Modifier = Modifier) {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        MonImage()
-        MonNom()
-        MesAdresses()
-        Demarrer()
+fun MonProfil(windowClass: WindowSizeClass) {
+    when (windowClass.windowWidthSizeClass) {
+        WindowWidthSizeClass.COMPACT -> {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.SpaceEvenly,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                MonImage()
+                MonNom()
+                MesAdresses()
+                Demarrer()
+            }
+        }
+        else -> {
+            Row(
+                modifier = Modifier.fillMaxSize(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    MonImage()
+                    MonNom()
+                }
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    MesAdresses()
+                    Demarrer()
+                }
+            }
+        }
     }
 }
 
